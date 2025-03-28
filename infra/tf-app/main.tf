@@ -8,6 +8,6 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_static_web_app" "web" {
   name                = "crol0005-static-webapp"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = "centralus"  # Azure Static Web Apps is only available in certain regions
-  sku_tier            = "Free"
+  location           = "centralus" # Azure Static Web Apps is only available in certain regions
+  sku_tier           = "Free"
 } 
