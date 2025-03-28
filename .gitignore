@@ -25,4 +25,7 @@ terraform.rc
 
 # IDE files
 .idea/
-.vscode/ 
+.vscode/
+
+# Terraform plan files
+*.plan 
