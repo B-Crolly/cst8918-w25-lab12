@@ -64,7 +64,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     
-    # OIDC Authentication with Azure
+    # OIDC Authentication with Azure (I hink this is necessary?)
     - name: Azure Login
       uses: azure/login@v1
       with:
