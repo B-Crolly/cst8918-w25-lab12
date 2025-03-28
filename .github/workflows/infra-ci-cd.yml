@@ -64,11 +64,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     
-    # OIDC Authentication with Azure (I hink this is necessary?)
+    # Azure Login with OIDC
+    # Using contributor app even for plan operations because static site resources 
+    # require listSecrets permissions that reader roles don't typically have
     - name: Azure Login
       uses: azure/login@v1
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID_CONTRIBUTOR }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     
