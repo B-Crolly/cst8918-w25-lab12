@@ -10,3 +10,18 @@ resource "azurerm_static_site" "web" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = "centralus" # Azure Static Web Apps is only available in certain regions
 } 
+# Virtual Network
+resource "azurerm_virtual_network" "vnet" {
+  name                = "crol0005-vnet"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  address_space       = ["10.0.0.0/16"]
+}
+
+# Subnet within the Virtual Network
+resource "azurerm_subnet" "subnet" {
+  name                 = "crol0005-subnet"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
