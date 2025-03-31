@@ -98,9 +98,15 @@ jobs:
     - name: Terraform Plan
       id: tf-plan
       run: |
-        export exitcode=0
-        terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
-    
+        terraform plan -detailed-exitcode -no-color -out tfplan || echo $? > /tmp/tf_exit_code
+        
+        # If the exit code file exists, read it, otherwise it was 0
+        if [ -f /tmp/tf_exit_code ]; then
+          exitcode=$(cat /tmp/tf_exit_code)
+        else
+          exitcode=0
+        fi
+        
         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
         
         if [ $exitcode -eq 1 ]; then
