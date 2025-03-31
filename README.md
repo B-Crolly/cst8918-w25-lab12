@@ -11,10 +11,3 @@ setting up branch protection
 protection rules for production, require non-self review and main only
 ![alt text](image-3.png)
 
-
-
-
-
-
-
-
