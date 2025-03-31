@@ -98,7 +98,11 @@ jobs:
     - name: Terraform Plan
       id: tf-plan
       run: |
-        terraform plan -detailed-exitcode -no-color -out tfplan || echo $? > /tmp/tf_exit_code
+        # Use absolute path for the plan file
+        terraform plan -detailed-exitcode -no-color -out="$GITHUB_WORKSPACE/infra/tf-app/tfplan" || echo $? > /tmp/tf_exit_code
+        
+        # Debug - confirm the file exists
+        ls -la "$GITHUB_WORKSPACE/infra/tf-app"
         
         # If the exit code file exists, read it, otherwise it was 0
         if [ -f /tmp/tf_exit_code ]; then
@@ -121,7 +125,8 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: tfplan
-        path: tfplan
+        path: "${{ github.workspace }}/infra/tf-app/tfplan"
+        retention-days: 1
         
     # Create string output of Terraform Plan
     - name: Create String Output
@@ -198,6 +203,12 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: tfplan
+        path: "${{ github.workspace }}/infra/tf-app"
+    
+    # Debug - confirm file is downloaded
+    - name: Debug Downloaded Plan
+      run: |
+        ls -la "$GITHUB_WORKSPACE/infra/tf-app"
 
     # Terraform Apply
     - name: Terraform Apply
