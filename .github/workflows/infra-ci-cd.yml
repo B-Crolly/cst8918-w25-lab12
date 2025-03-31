@@ -65,10 +65,12 @@ jobs:
       uses: actions/checkout@v4
     
     # Azure Login with OIDC
+    # Using contributor app for both plan and apply because static site resources 
+    # require elevated permissions (listSecrets) that reader roles don't have
     - name: Azure Login
       uses: azure/login@v1
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID_CONTRIBUTOR }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     
