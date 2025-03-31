@@ -11,3 +11,7 @@ setting up branch protection
 protection rules for production, require non-self review and main only
 ![alt text](image-3.png)
 
+
+terraform plan output after vnet changes
+![alt text](image-4.png)
+
