@@ -9,7 +9,7 @@ resource "azurerm_static_site" "web" {
   name                = "crol0005-static-webapp"
   resource_group_name = azurerm_resource_group.rg.name
   location            = "centralus" # Azure Static Web Apps is only available in certain regions
-} 
+}
 # Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = "crol0005-vnet"
