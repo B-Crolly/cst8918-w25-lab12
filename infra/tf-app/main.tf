@@ -16,6 +16,11 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   address_space       = ["10.0.0.0/16"]
+  
+  tags = {
+    environment = "production"
+    purpose     = "demonstration"
+  }
 }
 
 # Subnet within the Virtual Network
@@ -23,5 +28,5 @@ resource "azurerm_subnet" "subnet" {
   name                 = "crol0005-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = ["10.0.2.0/24"]
 }
